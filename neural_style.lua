@@ -23,7 +23,7 @@ cmd:option('-style_weight', 1e2)
 cmd:option('-tv_weight', 1e-3)
 cmd:option('-num_iterations', 1000)
 cmd:option('-normalize_gradients', false)
-cmd:option('-init', 'random', 'random|image')
+cmd:option('-init', 'random', 'random|image|<path>')
 cmd:option('-optimizer', 'lbfgs', 'lbfgs|adam')
 cmd:option('-learning_rate', 1e1)
 
@@ -249,7 +249,10 @@ local function main(params)
   elseif params.init == 'image' then
     img = content_image_caffe:clone():float()
   else
-    error('Invalid init type')
+    local init_image = image.load(params.init, 3)
+	init_image = image.scale(init_image, params.image_size, 'bicubic')
+    local init_image_caffe = preprocess(init_image):float()
+    img = init_image_caffe:clone():float()
   end
   if params.gpu >= 0 then
     if params.backend ~= 'clnn' then
