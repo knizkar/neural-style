@@ -250,8 +250,9 @@ local function main(params)
     img = content_image_caffe:clone():float()
   else
     local init_image = image.load(params.init, 3)
-    init_image = image.scale(init_image, content_image, 'bicubic')
-    local init_image_caffe = preprocess(init_image):float()
+    local init_image_temp = torch.randn(content_image:size()):float()
+    init_image_temp = image.scale(init_image_temp, init_image, 'bicubic')
+    local init_image_caffe = preprocess(init_image_temp):float()
     img = init_image_caffe:clone():float()
   end
   if params.gpu >= 0 then
