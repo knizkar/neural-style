@@ -6,8 +6,6 @@ init=image
 gpu=-1
 num_iterations=200
 
-th neural_style.lua -style_image $style_image -content_image $content_image -gpu $gpu -save_iter 0 -image_size 32 -num_iterations $num_iterations -init $init -output_image out_32x32.png
-th neural_style.lua -style_image $style_image -content_image $content_image -gpu $gpu -save_iter 0 -image_size 64 -num_iterations $num_iterations -init out_32x32.png -output_image out_64x64.png
-th neural_style.lua -style_image $style_image -content_image $content_image -gpu $gpu -save_iter 0 -image_size 128 -num_iterations $num_iterations -init out_64x64.png -output_image out_128x128.png
+th neural_style.lua -style_image $style_image -content_image $content_image -gpu $gpu -save_iter 0 -image_size 128 -num_iterations $num_iterations -init $init -output_image out_128x128.png
 th neural_style.lua -style_image $style_image -content_image $content_image -gpu $gpu -save_iter 0 -image_size 256 -num_iterations $num_iterations -init out_128x128.png -output_image out_256x256.png
 th neural_style.lua -style_image $style_image -content_image $content_image -gpu $gpu -save_iter 0 -image_size 512 -num_iterations $num_iterations -init out_256x256.png -output_image out.png
